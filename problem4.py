@@ -15,8 +15,8 @@ It is widely used in web development, data science, and automation.
 Python's simple syntax makes it great for beginners.
 Many companies use Python for their projects."""
 
-    with open(filename, 'w') as f:
-        f.write(content)
+    with open(filename, 'w', encoding="utf-8") as file:
+        file.write(content)
     print(f"Created {filename}")
 
 
@@ -30,9 +30,10 @@ def count_words(filename):
     Returns:
         int: Total number of words
     """
-    # TODO: Open file and count words
-    # Hint: Use split() to separate words
-    pass
+    with open(filename, 'r', encoding="utf-8") as file:
+        file = file.read()
+        words = file.split()
+    return len(words)
 
 
 def count_lines(filename):
@@ -45,8 +46,10 @@ def count_lines(filename):
     Returns:
         int: Total number of lines
     """
-    # TODO: Open file and count lines
-    pass
+    with open(filename, 'r', encoding="utf-8") as file:
+        lines = file.readlines()
+    return len(lines)
+
 
 
 def count_characters(filename, include_spaces=True):
@@ -60,10 +63,13 @@ def count_characters(filename, include_spaces=True):
     Returns:
         int: Total number of characters
     """
-    # TODO: Open file and count characters
-    # If include_spaces is False, don't count spaces
-    pass
+    with open(filename, 'r', encoding="utf-8") as file:
+        text = file.read()
 
+        if not include_spaces:
+            text = text.replace(" ", "")
+
+    return len(text)
 
 def find_longest_word(filename):
     """
@@ -75,10 +81,21 @@ def find_longest_word(filename):
     Returns:
         str: The longest word found
     """
-    # TODO: Find the longest word
-    # Hint: You might need to remove punctuation
-    pass
+    with open(filename, "r", encoding="utf-8") as file:
+        text = file.read()
 
+    for punctuation in [".", ",", "!", "?", ":", ";", "'", '"']:
+        text = text.replace(punctuation, "")
+
+    words = text.split()
+
+    longest_word = ""
+    
+    for word in words:
+        if len(word) > len(longest_word):
+            longest_word = word
+
+    return longest_word
 
 def word_frequency(filename):
     """
@@ -93,13 +110,24 @@ def word_frequency(filename):
     """
     import string
 
+
     frequency = {}
 
-    # TODO: Open file
-    # TODO: Read all words
-    # TODO: Convert to lowercase
-    # TODO: Remove punctuation (use string.punctuation)
-    # TODO: Count frequency of each word
+    with open(filename, "r", encoding="utf-8") as file:
+        text = file.read()
+
+        text = text.lower()
+
+        for punct in string.punctuation:
+            text = text.replace(punct, "")
+
+        words = text.split()
+
+        for word in words:
+            if word in frequency:
+                frequency[word] += 1
+            else:
+                frequency[word] = 1
 
     return frequency
 

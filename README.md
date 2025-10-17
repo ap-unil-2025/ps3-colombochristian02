@@ -1,7 +1,7 @@
 # Problem Set 3: Git & Python Fundamentals
 
 ## Student Information
-Name: Christian Colombo
+Name: Christian Colombo /
 Date: 29/09/2025
 
 ## Assignment Overview

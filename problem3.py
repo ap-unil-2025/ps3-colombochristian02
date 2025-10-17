@@ -14,11 +14,16 @@ def get_numbers_from_user():
     numbers = []
 
     while True:
-        # TODO: Get input from user
-        # TODO: Check if user typed 'done'
-        # TODO: Try to convert to float and add to list
-        # TODO: Handle invalid input gracefully
-        pass
+        number = input("Insert a list of numbers, when done type: 'done' ").strip()
+        
+
+        if number.lower() == "done":
+            break
+
+        if number.isdigit():
+            numbers.append(float(number))
+        else:
+            print("Try again, type 'done' when you are done!")
 
     return numbers
 
@@ -42,16 +47,25 @@ def analyze_numbers(numbers):
     """
     if not numbers:
         return None
+    else:
+        count = len(numbers)
+        tot_sum = sum(numbers)
+        average = tot_sum/count
+        min_num = min(numbers)
+        max_num = max(numbers)
+        even_count = sum(1 for n in numbers if n.is_integer() and int(n) % 2 == 0)
+        odd_count = sum(1 for n in numbers if n.is_integer() and int(n) % 2 != 0)
 
-    analysis = {}
 
-    # TODO: Calculate count
-    # TODO: Calculate sum
-    # TODO: Calculate average
-    # TODO: Find minimum
-    # TODO: Find maximum
-    # TODO: Count even numbers (hint: use modulo operator)
-    # TODO: Count odd numbers
+    analysis = {
+        "count": count,
+        "sum": tot_sum,
+        "average": average,
+        "minimum": min_num,
+        "maximum": max_num,
+        "even_count": even_count,
+        "odd_count": odd_count
+    }
 
     return analysis
 
@@ -69,13 +83,13 @@ def display_analysis(analysis):
     print("\nAnalysis Results:")
     print("-" * 20)
 
-    # TODO: Display all analysis results in a nice format
-    # Example:
-    # Count: 5
-    # Sum: 25
-    # Average: 5.00
-    # etc.
-    pass
+    print("Count:", analysis.get("count"))
+    print("Sum:", analysis.get("sum"))
+    print("Average:", analysis.get("average"))
+    print("Minimum:", analysis.get("minimum"))
+    print("Maximum:", analysis.get("maximum"))
+    print("Even Count:", analysis.get("even_count"))
+    print("Odd Count:", analysis.get("odd_count"))
 
 
 def main():
